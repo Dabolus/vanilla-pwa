@@ -1,0 +1,47 @@
+*, *::before, *::after, :host {
+  box-sizing: border-box;
+}
+
+main > * {
+  display: none;
+}
+
+main > [active] {
+  display: block;
+}
+
+section {
+  padding: 2rem 3rem;
+  background: var(--section-bg-color);
+  color: var(--primary-text-color);
+}
+
+p {
+  text-align: justify;
+}
+
+hr {
+  width: calc(100% - 1rem);
+  border: 0;
+  padding: .025rem;
+  margin: .5rem;
+  background-color: var(--divider-color);
+}
+
+a {
+  text-decoration: none;
+  color: var(--accent-color);
+}
+
+a:hover, a:focus {
+  text-decoration: underline;
+}
+
+@media (min-width: 640px) {
+  section {
+    max-width: 37.5rem;
+    margin: 1.5rem auto;
+    border-radius: .5rem;
+    box-shadow: 0 .06rem .065rem 0 rgba(0, 0, 0, 0.14), 0 .003rem .15rem 0 rgba(0, 0, 0, 0.12), 0 .09rem .0035rem -.065rem rgba(0, 0, 0, 0.2);
+  }
+}

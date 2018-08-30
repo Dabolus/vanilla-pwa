@@ -1,0 +1,80 @@
+{
+  "/": {
+    "components/shell/element.js": {
+      "type": "script",
+      "weight": 1
+    },
+    "components/shell/styles.css": {
+      "type": "style",
+      "weight": 1
+    },
+    "components/shell/template.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "components/home/element.js": {
+      "type": "script",
+      "weight": 1
+    },
+    "components/home/styles.css": {
+      "type": "style",
+      "weight": 1
+    },
+    "components/home/template.html": {
+      "type": "document",
+      "weight": 1
+    }
+  },
+  "/home": {
+    "components/shell/element.js": {
+      "type": "script",
+      "weight": 1
+    },
+    "components/shell/styles.css": {
+      "type": "style",
+      "weight": 1
+    },
+    "components/shell/template.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "components/home/element.js": {
+      "type": "script",
+      "weight": 1
+    },
+    "components/home/styles.css": {
+      "type": "style",
+      "weight": 1
+    },
+    "components/home/template.html": {
+      "type": "document",
+      "weight": 1
+    }
+  },
+  "/info": {
+    "components/shell/element.js": {
+      "type": "script",
+      "weight": 1
+    },
+    "components/shell/styles.css": {
+      "type": "style",
+      "weight": 1
+    },
+    "components/shell/template.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "components/info/element.js": {
+      "type": "script",
+      "weight": 1
+    },
+    "components/info/styles.css": {
+      "type": "style",
+      "weight": 1
+    },
+    "components/info/template.html": {
+      "type": "document",
+      "weight": 1
+    }
+  }
+}

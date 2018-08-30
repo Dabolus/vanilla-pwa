@@ -3,7 +3,7 @@
   flex-direction: column;
   min-height: 100%;
 
-  --primary-color: #01579b;
+  --primary-color: #2e7d32;
   --accent-color: #d50000;
   --primary-text-on-primary: #fff;
   --secondary-text-on-primary: rgba(255, 255, 255, .75);

@@ -1,3 +1,7 @@
+self.cacheName = 'vanilla-pwa-static';
+self.cacheVersion = 'v1';
+self.cacheId = `${self.cacheName}-${self.cacheVersion}`;
+
 self.precacheManifest = [
   'index.html',
   'site.webmanifest',
@@ -13,4 +17,8 @@ self.precacheManifest = [
   'components/info/element.js',
   'components/info/styles.css',
   'components/info/template.html',
+];
+
+self.runtimeCacheManifest = [
+  /fonts\.gstatic\.com/,
 ];

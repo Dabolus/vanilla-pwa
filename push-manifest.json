@@ -1,5 +1,17 @@
 {
   "/": {
+    "components/base.js": {
+      "type": "script",
+      "weight": 1
+    },
+    "components/utils.js": {
+      "type": "script",
+      "weight": 1
+    },
+    "components/shared-styles.css": {
+      "type": "style",
+      "weight": 1
+    },
     "components/shell/element.js": {
       "type": "script",
       "weight": 1
@@ -26,6 +38,18 @@
     }
   },
   "/home": {
+    "components/base.js": {
+      "type": "script",
+      "weight": 1
+    },
+    "components/utils.js": {
+      "type": "script",
+      "weight": 1
+    },
+    "components/shared-styles.css": {
+      "type": "style",
+      "weight": 1
+    },
     "components/shell/element.js": {
       "type": "script",
       "weight": 1
@@ -52,6 +76,18 @@
     }
   },
   "/info": {
+    "components/base.js": {
+      "type": "script",
+      "weight": 1
+    },
+    "components/utils.js": {
+      "type": "script",
+      "weight": 1
+    },
+    "components/shared-styles.css": {
+      "type": "style",
+      "weight": 1
+    },
     "components/shell/element.js": {
       "type": "script",
       "weight": 1

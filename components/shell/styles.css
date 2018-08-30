@@ -88,3 +88,68 @@ footer a, footer b {
   color: var(--primary-text-color);
   font-weight: bold;
 }
+
+#update-notification {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: .5rem 1.25rem;
+  background-color: var(--section-bg-color);
+  color: var(--primary-text-color);
+  box-shadow: 0 .24rem .26rem 0 rgba(0, 0, 0, 0.14), 0 .012rem .6rem 0 rgba(0, 0, 0, 0.12), 0 .36rem .014rem -.26rem rgba(0, 0, 0, 0.2);
+  will-change: transform;
+  transform: translateY(100%);
+  transition-property: visibility, transform;
+  transition-duration: .3s;
+  visibility: hidden;
+}
+
+#update-notification.active {
+  visibility: visible;
+  transform: translateY(0);
+}
+
+#update-notification .text {
+  padding: .75rem 1.5rem .75rem .75rem;
+  display: flex;
+  align-items: center;
+}
+
+#update-notification .actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+#update-notification .actions button {
+  font-size: .875rem;
+  font-weight: 500;
+  padding: 0 8px 0 8px;
+  min-width: 64px;
+  height: 36px;
+  color: var(--secondary-text-color);
+  background-color: transparent;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-radius: .125rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+#update-notification .actions button:hover {
+  text-decoration: underline;
+}
+
+#update-notification .actions button#update-now {
+  color: var(--accent-color);
+}
+
+@media (min-width: 640px) {
+  #update-notification {
+    width: 20rem;
+    margin: auto;
+    border-radius: .5rem .5rem 0 0;
+  }
+}

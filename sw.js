@@ -1,3 +1,6 @@
+self.cacheName = 'vanilla-pwa-static';
+self.cacheVersion = 'v1';
+self.cacheId = `${self.cacheName}-${self.cacheVersion}`;
 self.importScripts('./cache-manifest.js');
 
 self.addEventListener('install', (event) => {
@@ -10,18 +13,22 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('activate', (event) => {
-  // When the SW is activated, check if there is an older version
-  // of our application cache and delete it.
   event.waitUntil(
-    caches.keys().then((cacheNames) =>
-      Promise.all(
-        cacheNames.filter((cacheName) =>
-          cacheName.startsWith(self.cacheName) && cacheName !== self.cacheId,
-        ).map((cacheName) =>
-          caches.delete(cacheName),
+    Promise.all([
+      // When the SW is activated, claim any currently available client
+      self.clients.claim(),
+      // Check if there is an older version
+      // of our application cache and delete it.
+      caches.keys().then((cacheNames) =>
+        Promise.all(
+          cacheNames.filter((cacheName) =>
+            cacheName.startsWith(self.cacheName) && cacheName !== self.cacheId,
+          ).map((cacheName) =>
+            caches.delete(cacheName),
+          ),
         ),
       ),
-    ),
+    ]),
   );
 });
 
@@ -47,4 +54,13 @@ self.addEventListener('fetch', (event) => {
     });
   }
   event.respondWith(promise);
+});
+
+self.addEventListener('message', (event) => {
+  switch (event.data.action) {
+    case 'update':
+      // Skip the waiting phase and immediately replace the old Service Worker
+      self.skipWaiting();
+      break;
+  }
 });

@@ -1,4 +1,4 @@
-self.importScripts('./precache-manifest.js');
+self.importScripts('./cache-manifest.js');
 
 self.addEventListener('install', (event) => {
   // When the SW is installed, add to the cache all the URLs

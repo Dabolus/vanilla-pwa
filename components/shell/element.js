@@ -37,6 +37,10 @@ class MyShell extends BaseElement {
         page.removeAttribute('active');
       }
     }
+    document.title = `Vanilla PWA - ${{
+      'home': 'Home',
+      'info': 'Info',
+    }[path]}`;
   }
 
   toggleUpdateNotification(state) {

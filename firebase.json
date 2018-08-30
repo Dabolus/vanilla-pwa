@@ -1,0 +1,59 @@
+{
+  "hosting": {
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      "generate-firebase-json.js",
+      "README.md",
+      "**/.*"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
+    "headers": [
+      {
+        "source": "**/sw.js",
+        "headers": [
+          {
+            "key": "Service-Worker-Allowed",
+            "value": "/"
+          },
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          }
+        ]
+      },
+      {
+        "source": "/",
+        "headers": [
+          {
+            "key": "Link",
+            "value": "</components/base.js>;rel=preload;as=script,</components/utils.js>;rel=preload;as=script,</components/shared-styles.css>;rel=preload;as=style,</components/shell/element.js>;rel=preload;as=script,</components/shell/styles.css>;rel=preload;as=style,</components/shell/template.html>;rel=preload;as=document,</components/home/element.js>;rel=preload;as=script,</components/home/styles.css>;rel=preload;as=style,</components/home/template.html>;rel=preload;as=document"
+          }
+        ]
+      },
+      {
+        "source": "/home",
+        "headers": [
+          {
+            "key": "Link",
+            "value": "</components/base.js>;rel=preload;as=script,</components/utils.js>;rel=preload;as=script,</components/shared-styles.css>;rel=preload;as=style,</components/shell/element.js>;rel=preload;as=script,</components/shell/styles.css>;rel=preload;as=style,</components/shell/template.html>;rel=preload;as=document,</components/home/element.js>;rel=preload;as=script,</components/home/styles.css>;rel=preload;as=style,</components/home/template.html>;rel=preload;as=document"
+          }
+        ]
+      },
+      {
+        "source": "/info",
+        "headers": [
+          {
+            "key": "Link",
+            "value": "</components/base.js>;rel=preload;as=script,</components/utils.js>;rel=preload;as=script,</components/shared-styles.css>;rel=preload;as=style,</components/shell/element.js>;rel=preload;as=script,</components/shell/styles.css>;rel=preload;as=style,</components/shell/template.html>;rel=preload;as=document,</components/info/element.js>;rel=preload;as=script,</components/info/styles.css>;rel=preload;as=style,</components/info/template.html>;rel=preload;as=document"
+          }
+        ]
+      }
+    ]
+  }
+}

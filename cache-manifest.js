@@ -16,7 +16,6 @@ self.precacheManifest = [
 ];
 
 self.runtimeStaticCacheManifest = [
-  /fonts\.gstatic\.com/,
 ];
 
 self.runtimeIDBCacheManifest = [

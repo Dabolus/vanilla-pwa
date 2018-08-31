@@ -15,6 +15,10 @@ self.precacheManifest = [
   'components/info/template.html',
 ];
 
-self.runtimeCacheManifest = [
+self.runtimeStaticCacheManifest = [
   /fonts\.gstatic\.com/,
+];
+
+self.runtimeIDBCacheManifest = [
+  /api\/data/,
 ];

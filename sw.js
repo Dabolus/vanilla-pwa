@@ -65,6 +65,12 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
+  // For some reason, DevTools opening will trigger these o-i-c requests.
+  // We will just ignore them to avoid showing errors in console.
+  if (event.request.cache === 'only-if-cached' && event.request.mode !== 'same-origin') {
+    return Promise.resolve();
+  }
+
   // Don't cache anything that isn't a GET request
   if (event.request.method !== 'GET') {
     return event.respondWith(fetch(event.request));

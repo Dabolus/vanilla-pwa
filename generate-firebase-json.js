@@ -19,6 +19,15 @@ const firebaseJson = {
     ],
     headers: [
       {
+        source: '**',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'private, max-age=1209600',
+          },
+        ],
+      },
+      {
         source: '**/sw.js',
         headers: [
           {

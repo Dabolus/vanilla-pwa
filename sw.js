@@ -5,9 +5,25 @@ self.cacheVersion = 'v1';
 self.cacheId = `${self.cacheName}-${self.cacheVersion}`;
 self.importScripts('./cache-manifest.js');
 
+self.openDB = () =>
+  new Promise((resolve, reject) => {
+    const openDbReq = indexedDB.open(self.idbName, self.idbVersion);
+    openDbReq.onupgradeneeded = ({ oldVersion }) => {
+      const db = openDbReq.result;
+      switch (oldVersion) {
+        // 0 = the DB has not been touched yet
+        case 0:
+          db.createObjectStore('data', { keyPath: 'id' });
+      }
+    };
+    openDbReq.onsuccess = () => resolve(openDbReq.result);
+    openDbReq.onerror = reject;
+  });
+
+
 self.putIntoIDB = (objectStore, objs) =>
   Promise.all((Array.isArray(objs) ? objs : [objs]).map(obj =>
-    self.idb
+    self.openDB()
       .then(db => new Promise((resolve, reject) => {
           const req =
             db.transaction(objectStore, 'readwrite')
@@ -43,19 +59,7 @@ self.addEventListener('activate', (event) => {
           ),
         ),
       ),
-      self.idb = new Promise((resolve, reject) => {
-        const openDbReq = indexedDB.open(self.idbName, self.idbVersion);
-        openDbReq.onupgradeneeded = ({ oldVersion }) => {
-          const db = openDbReq.result;
-          switch (oldVersion) {
-            // 0 = the DB has not been touched yet
-            case 0:
-              db.createObjectStore('data', { keyPath: 'id' });
-          }
-        };
-        openDbReq.onsuccess = () => resolve(openDbReq.result);
-        openDbReq.onerror = reject;
-      }),
+      self.openDB(),
     ]),
   );
 });
@@ -81,7 +85,7 @@ self.addEventListener('fetch', (event) => {
   // so that it can display the new ones as soon as they are available.
   if (self.runtimeIDBCacheManifest.some((regex) => regex.test(event.request.url))) {
     return event.respondWith(
-      self.idb
+      self.openDB()
         .then((db) => new Promise((resolve, reject) => {
           const req = db.transaction('data').objectStore('data').getAll();
           req.onsuccess = () => resolve(req.result);

@@ -1,0 +1,16 @@
+<section>
+  <h1>Dynamic data </h1>
+  <hr>
+  <p>This page will download some dynamic data from a mock backend.</p>
+  <p>
+    The data will be cached in your browser's IndexedDB, while the relative images
+    will be cached in your Cache Storage. After loading the data the first time, you
+    should be able to see it even when offline. The images are served using a "cache first"
+    approach; this means that after they are cached the first time they will always be loaded
+    from the local cache. The data itself is cached the first time, and then it is loaded
+    from IDB in the subsequent requests. However, each time a request is made, the
+    Service Worker will still try to fetch the original data and update the IDB cache if needed.
+    This approach is commonly known as "stale while revalidate".
+  </p>
+</section>
+<div id="data-container"></div>

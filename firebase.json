@@ -46,11 +46,11 @@
         ]
       },
       {
-        "source": "/info",
+        "source": "/dynamic-data",
         "headers": [
           {
             "key": "Link",
-            "value": "</components/base.js>;rel=preload;as=script,</components/utils.js>;rel=preload;as=script,</components/shared-styles.css>;rel=preload;as=style,</components/shell/element.js>;rel=preload;as=script,</components/shell/styles.css>;rel=preload;as=style,</components/shell/template.html>;rel=preload;as=document,</components/info/element.js>;rel=preload;as=script,</components/info/styles.css>;rel=preload;as=style,</components/info/template.html>;rel=preload;as=document"
+            "value": "</components/base.js>;rel=preload;as=script,</components/utils.js>;rel=preload;as=script,</components/shared-styles.css>;rel=preload;as=style,</components/shell/element.js>;rel=preload;as=script,</components/shell/styles.css>;rel=preload;as=style,</components/shell/template.html>;rel=preload;as=document,</components/dynamic-data/element.js>;rel=preload;as=script,</components/dynamic-data/styles.css>;rel=preload;as=style,</components/dynamic-data/template.html>;rel=preload;as=document"
           }
         ]
       }

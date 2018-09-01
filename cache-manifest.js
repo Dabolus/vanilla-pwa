@@ -10,12 +10,13 @@ self.precacheManifest = [
   'components/home/element.js',
   'components/home/styles.css',
   'components/home/template.html',
-  'components/info/element.js',
-  'components/info/styles.css',
-  'components/info/template.html',
+  'components/dynamic-data/element.js',
+  'components/dynamic-data/styles.css',
+  'components/dynamic-data/template.html',
 ];
 
 self.runtimeStaticCacheManifest = [
+  /placehold\.it/
 ];
 
 self.runtimeIDBCacheManifest = [

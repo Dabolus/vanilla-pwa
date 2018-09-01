@@ -39,7 +39,7 @@ class MyShell extends BaseElement {
     }
     document.title = `Vanilla PWA - ${{
       'home': 'Home',
-      'info': 'Info',
+      'dynamic-data': 'Dynamic data',
     }[path]}`;
   }
 

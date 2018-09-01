@@ -1,7 +1,22 @@
+self.idbName = 'vanilla-pwa-db';
+self.idbVersion = 1;
 self.cacheName = 'vanilla-pwa-static';
 self.cacheVersion = 'v1';
 self.cacheId = `${self.cacheName}-${self.cacheVersion}`;
 self.importScripts('./cache-manifest.js');
+
+self.putIntoIDB = (objectStore, objs) =>
+  Promise.all((Array.isArray(objs) ? objs : [objs]).map(obj =>
+    self.idb
+      .then(db => new Promise((resolve, reject) => {
+          const req =
+            db.transaction(objectStore, 'readwrite')
+              .objectStore(objectStore)
+              .put(obj);
+          req.onsuccess = () => resolve(req.result);
+          req.onerror = reject;
+        }),
+      )));
 
 self.addEventListener('install', (event) => {
   // When the SW is installed, add to the cache all the URLs
@@ -28,6 +43,19 @@ self.addEventListener('activate', (event) => {
           ),
         ),
       ),
+      self.idb = new Promise((resolve, reject) => {
+        const openDbReq = indexedDB.open(self.idbName, self.idbVersion);
+        openDbReq.onupgradeneeded = ({ oldVersion }) => {
+          const db = openDbReq.result;
+          switch (oldVersion) {
+            // 0 = the DB has not been touched yet
+            case 0:
+              db.createObjectStore('data', { keyPath: 'id' });
+          }
+        };
+        openDbReq.onsuccess = () => resolve(openDbReq.result);
+        openDbReq.onerror = reject;
+      }),
     ]),
   );
 });
@@ -38,7 +66,7 @@ self.addEventListener('fetch', (event) => {
     return event.respondWith(fetch(event.request));
   }
 
-  // TODO: IDB CACHE
+  // IDB CACHE
   // This part of the SW will cache data coming from our backend.
   // Any sort of document-type data is perfect for being added to IDB,
   // especially if it already features an ID.
@@ -51,6 +79,43 @@ self.addEventListener('fetch', (event) => {
   // the problem is easily fixable by, for example, posting a message
   // to the frontend, telling it that the data has been updated,
   // so that it can display the new ones as soon as they are available.
+  if (self.runtimeIDBCacheManifest.some((regex) => regex.test(event.request.url))) {
+    return event.respondWith(
+      self.idb
+        .then((db) => new Promise((resolve, reject) => {
+          const req = db.transaction('data').objectStore('data').getAll();
+          req.onsuccess = () => resolve(req.result);
+          req.onerror = reject;
+        }))
+        .then((data) => {
+          // Even if we already saved the data in idb,
+          // we start a new request so that the data can
+          // be updated in background. In this way, we will
+          // see the updated data next time we open up the PWA
+          const reqPromise = fetch(event.request)
+            .then((res) => {
+              // The response cannot be used anymore after being consumed,
+              // so we have to clone it
+              const clonedRes = res.clone();
+              // Put the data into IDB, then return the cloned response
+              return res.json()
+                .then((reqObjs) => self.putIntoIDB('data', reqObjs))
+                .then(() => clonedRes);
+            })
+            .then(res => res.json())
+            .then(reqObjs => {
+              self.putIntoIDB('data', reqObjs);
+              return new Response(JSON.stringify(reqObjs));
+            });
+          // If we got data from IDB, respond with it
+          if (data && Object.keys(Array.isArray(data) ? data : [data]).length > 0) {
+            return new Response(JSON.stringify(data));
+          }
+          // Otherwise, just return the fetch request that will cache the data into IDB
+          return reqPromise;
+        }),
+    );
+  }
 
   // STATIC CACHE
   // This part of the SW will generate a runtime static cache for

@@ -7,8 +7,9 @@ const firebaseJson = {
     public: '.',
     ignore: [
       'firebase.json',
+      'generate-firebase-json.js',
+      'README.md',
       '**/.*',
-      '**/node_modules/**',
     ],
     rewrites: [
       {
@@ -48,5 +49,5 @@ const firebaseJson = {
 
 writeFileSync(
   resolve(__dirname, 'firebase.json'),
-  JSON.stringify(firebaseJson, null, 2),
+  `${JSON.stringify(firebaseJson, null, 2)}\n`,
 );

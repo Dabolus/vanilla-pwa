@@ -3,37 +3,9 @@ self.idbVersion = 1;
 self.cacheName = 'vanilla-pwa-static';
 self.cacheVersion = 'v1';
 self.cacheId = `${self.cacheName}-${self.cacheVersion}`;
-self.importScripts('./cache-manifest.js');
+self.importScripts('./cache-manifest.js', './sw-helpers.js');
 
-self.openDB = () =>
-  new Promise((resolve, reject) => {
-    const openDbReq = indexedDB.open(self.idbName, self.idbVersion);
-    openDbReq.onupgradeneeded = ({ oldVersion }) => {
-      const db = openDbReq.result;
-      switch (oldVersion) {
-        // 0 = the DB has not been touched yet
-        case 0:
-          db.createObjectStore('data', { keyPath: 'id' });
-      }
-    };
-    openDbReq.onsuccess = () => resolve(openDbReq.result);
-    openDbReq.onerror = reject;
-  });
-
-
-self.putIntoIDB = (objectStore, objs) =>
-  Promise.all((Array.isArray(objs) ? objs : [objs]).map(obj =>
-    self.openDB()
-      .then(db => new Promise((resolve, reject) => {
-          const req =
-            db.transaction(objectStore, 'readwrite')
-              .objectStore(objectStore)
-              .put(obj);
-          req.onsuccess = () => resolve(req.result);
-          req.onerror = reject;
-        }),
-      )));
-
+// Event fired when the SW is installed
 self.addEventListener('install', (event) => {
   // When the SW is installed, add to the cache all the URLs
   // specified in the precache manifest.
@@ -43,6 +15,7 @@ self.addEventListener('install', (event) => {
   );
 });
 
+// Event fired when the SW is activated
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     Promise.all([
@@ -64,6 +37,7 @@ self.addEventListener('activate', (event) => {
   );
 });
 
+// Event fired when the website tries to fetch something
 self.addEventListener('fetch', (event) => {
   // For some reason, DevTools opening will trigger these o-i-c requests.
   // We will just ignore them to avoid showing errors in console.
@@ -160,11 +134,60 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(promise);
 });
 
+// Event fired when the website posts a message to the Service Worker
 self.addEventListener('message', (event) => {
   switch (event.data.action) {
     case 'update':
       // Skip the waiting phase and immediately replace the old Service Worker
       self.skipWaiting();
+      break;
+    case 'fetch-data':
+      self.fetchData = event.data.options;
+      break;
+  }
+});
+
+// Event fired when a new background sync is registered by the website
+self.addEventListener('sync', (event) => {
+  switch (event.tag) {
+    case 'server-post':
+      event.waitUntil(fetch(self.fetchData.url, self.fetchData));
+      break;
+  }
+});
+
+// Event fired when a push message is sent to the Service Worker via the Web Push protocol
+self.addEventListener('push', (event) => {
+  // We will parse the data received via Web Push and show it
+  // to the user in the form of a push notification
+  const data = event.data.json();
+  // We will have a default icon and badge, but the server might decide
+  // to send different data, so we allow it to override them
+  event.waitUntil(self.registration.showNotification(data.title, {
+    icon: '/images/icons/android-chrome-512x512.png',
+    badge: '/images/icons/mstile-70x70.png',
+    ...data,
+  }));
+});
+
+// Event fired when the user clicks a notification
+self.addEventListener('notificationclick', (event) => {
+  // First of all, close the notification
+  event.notification.close();
+  // The notification has an action tag associated with it.
+  // We will be doing something according to it.
+  switch (event.action) {
+    // The user clicked on "dismiss", so just do nothing
+    case 'dismiss':
+      break;
+    // The user wants to open (or focus) the background sync page
+    case 'open-background-sync-page':
+      event.waitUntil(self.openOrFocus('/background-sync'));
+      break;
+    // In any other case (i.e. simple click on the notification),
+    // open or focus any available page of our application
+    default:
+      event.waitUntil(self.openOrFocus('*'));
       break;
   }
 });

@@ -40,8 +40,16 @@ header > h1 {
   color: var(--primary-text-on-primary);
 }
 
+nav {
+  width: 100%;
+  text-align: center;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
 nav > a {
   text-decoration: none;
+  text-transform: uppercase;
   color: var(--secondary-text-on-primary);
   display: inline-block;
   padding: .5rem 1rem;

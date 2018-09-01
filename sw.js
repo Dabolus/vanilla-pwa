@@ -151,7 +151,11 @@ self.addEventListener('message', (event) => {
 self.addEventListener('sync', (event) => {
   switch (event.tag) {
     case 'server-post':
-      event.waitUntil(fetch(self.fetchData.url, self.fetchData));
+      event.waitUntil(
+        fetch(self.fetchData.url, self.fetchData)
+          .then((res) => res.json())
+          .then((res) => res.success ? res : Promise.reject(res)),
+      );
       break;
   }
 });

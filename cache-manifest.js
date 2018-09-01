@@ -13,10 +13,13 @@ self.precacheManifest = [
   'components/dynamic-data/element.js',
   'components/dynamic-data/styles.css',
   'components/dynamic-data/template.html',
+  'components/background-sync/element.js',
+  'components/background-sync/styles.css',
+  'components/background-sync/template.html',
 ];
 
 self.runtimeStaticCacheManifest = [
-  /placehold\.it/
+  /placehold\.it/,
 ];
 
 // Each of this entries should contain a capturing group that will be used as an object store on IDB

@@ -112,5 +112,43 @@
       "type": "document",
       "weight": 1
     }
+  },
+  "/background-sync": {
+    "components/base.js": {
+      "type": "script",
+      "weight": 1
+    },
+    "components/utils.js": {
+      "type": "script",
+      "weight": 1
+    },
+    "components/shared-styles.css": {
+      "type": "style",
+      "weight": 1
+    },
+    "components/shell/element.js": {
+      "type": "script",
+      "weight": 1
+    },
+    "components/shell/styles.css": {
+      "type": "style",
+      "weight": 1
+    },
+    "components/shell/template.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "components/background-sync/element.js": {
+      "type": "script",
+      "weight": 1
+    },
+    "components/background-sync/styles.css": {
+      "type": "style",
+      "weight": 1
+    },
+    "components/background-sync/template.html": {
+      "type": "document",
+      "weight": 1
+    }
   }
 }

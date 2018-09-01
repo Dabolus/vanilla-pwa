@@ -53,6 +53,15 @@
             "value": "</components/base.js>;rel=preload;as=script,</components/utils.js>;rel=preload;as=script,</components/shared-styles.css>;rel=preload;as=style,</components/shell/element.js>;rel=preload;as=script,</components/shell/styles.css>;rel=preload;as=style,</components/shell/template.html>;rel=preload;as=document,</components/dynamic-data/element.js>;rel=preload;as=script,</components/dynamic-data/styles.css>;rel=preload;as=style,</components/dynamic-data/template.html>;rel=preload;as=document"
           }
         ]
+      },
+      {
+        "source": "/background-sync",
+        "headers": [
+          {
+            "key": "Link",
+            "value": "</components/base.js>;rel=preload;as=script,</components/utils.js>;rel=preload;as=script,</components/shared-styles.css>;rel=preload;as=style,</components/shell/element.js>;rel=preload;as=script,</components/shell/styles.css>;rel=preload;as=style,</components/shell/template.html>;rel=preload;as=document,</components/background-sync/element.js>;rel=preload;as=script,</components/background-sync/styles.css>;rel=preload;as=style,</components/background-sync/template.html>;rel=preload;as=document"
+          }
+        ]
       }
     ]
   }

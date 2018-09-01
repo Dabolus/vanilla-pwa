@@ -89,11 +89,13 @@ self.addEventListener('fetch', (event) => {
   // the problem is easily fixable by, for example, posting a message
   // to the frontend, telling it that the data has been updated,
   // so that it can display the new ones as soon as they are available.
-  if (self.runtimeIDBCacheManifest.some((regex) => regex.test(event.request.url))) {
+  const idbCacheRegex = self.runtimeIDBCacheManifest.find((regex) => regex.test(event.request.url));
+  if (idbCacheRegex) {
+    const [, store] = idbCacheRegex.exec(event.request.url);
     return event.respondWith(
       self.openDB()
         .then((db) => new Promise((resolve, reject) => {
-          const req = db.transaction('data').objectStore('data').getAll();
+          const req = db.transaction(store).objectStore(store).getAll();
           req.onsuccess = () => resolve(req.result);
           req.onerror = reject;
         }))
@@ -109,12 +111,12 @@ self.addEventListener('fetch', (event) => {
               const clonedRes = res.clone();
               // Put the data into IDB, then return the cloned response
               return res.json()
-                .then((reqObjs) => self.putIntoIDB('data', reqObjs))
+                .then((reqObjs) => self.putIntoIDB(store, reqObjs))
                 .then(() => clonedRes);
             })
             .then(res => res.json())
             .then(reqObjs => {
-              self.putIntoIDB('data', reqObjs);
+              self.putIntoIDB(store, reqObjs);
               return new Response(JSON.stringify(reqObjs));
             });
           // If we got data from IDB, respond with it

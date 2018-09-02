@@ -4,8 +4,10 @@ node_js:
 cache:
   directories:
   - functions/node_modules
+before_install:
+  - npm i -g npm
 install:
-- cd functions && npm i
+- npm i --prefix functions
 deploy:
   provider: firebase
   token:

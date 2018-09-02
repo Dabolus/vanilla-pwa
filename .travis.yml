@@ -1,4 +1,11 @@
-language: generic
+language: node_js
+node_js:
+- 6.11.5
+cache:
+  directories:
+  - functions/node_modules
+install:
+- cd functions && npm i
 deploy:
   provider: firebase
   token:

@@ -6,8 +6,6 @@ cache:
   - functions/node_modules
 before_install:
   - npm i -g npm
-install:
-- npm i --prefix functions
 deploy:
   provider: firebase
   token:

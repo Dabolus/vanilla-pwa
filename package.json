@@ -1,0 +1,10 @@
+{
+  "name": "vanilla-pwa",
+  "description": "An example of a PWA completely written from scratch",
+  "scripts": {
+    "serve": "firebase serve",
+    "deploy": "firebase deploy",
+    "postinstall": "npm i --prefix functions"
+  },
+  "private": true
+}

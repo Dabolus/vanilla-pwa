@@ -10,6 +10,8 @@ const firebaseJson = {
       'generate-firebase-json.js',
       'README.md',
       '**/.*',
+      '**/node_modules/**/*',
+      '**/functions/**/*',
     ],
     rewrites: [
       {

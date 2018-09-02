@@ -31,9 +31,7 @@ api.post('/post', (req, res) => {
     !req.body.subscription.endpoint ||
     !req.body.subscription.keys ||
     !req.body.subscription.keys.p256dh ||
-    !req.body.subscription.keys.auth ||
-    !req.body.subscription.keys.p256dh ||
-    !req.body.msg) {
+    !req.body.subscription.keys.auth) {
     res.status(400).json({
       success: false,
       data: 'Bad Request',
@@ -45,7 +43,7 @@ api.post('/post', (req, res) => {
     body: 'Your POST request has been received successfully',
     actions: [{
       action: 'dismiss',
-      title: 'Ignore',
+      title: 'Dismiss',
     }, {
       action: 'open-background-sync-page',
       title: 'Send another',

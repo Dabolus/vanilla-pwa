@@ -153,7 +153,7 @@ self.addEventListener('message', (event) => {
 // Event fired when a new background sync is registered by the website
 self.addEventListener('sync', (event) => {
   switch (event.tag) {
-    case 'server-post':
+    case 'fetch':
       event.waitUntil(
         fetch(self.fetchData.url, self.fetchData)
           .then((res) => res.json())

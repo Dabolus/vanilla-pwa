@@ -1,4 +1,5 @@
 import BaseElement from '../base.js';
+import '../../db-helpers.js';
 
 class MyBackgroundSync extends BaseElement {
   constructor() {
@@ -81,20 +82,17 @@ class MyBackgroundSync extends BaseElement {
     if (!registration) {
       return;
     }
-    // Send the message to send to the Service Worker
-    await navigator.serviceWorker.controller.postMessage({
-      action: 'fetch-data',
-      options: {
-        url: '/api/post',
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          subscription: this.pushSubscription.toJSON(),
-        }),
+    // Add the message to the queue on IDB
+    await self.putIntoDB('fetch-queue', {
+      url: '/api/post',
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
       },
+      body: JSON.stringify({
+        subscription: this.pushSubscription.toJSON(),
+      }),
     });
     // Tell the Service Worker to fire the background sync with the "fetch" tag
     await registration.sync.register('fetch');

@@ -38,7 +38,12 @@ api.post('/post', (req, res) => {
     });
     return;
   }
-  webPush.sendNotification(req.body.subscription, JSON.stringify({
+  // At this point, imagine that the server has to do some kind of asynchronous
+  // heavy work for us. Instead of blocking us, the server will respond 200 OK
+  // to tell the client that its request has been enqueued and will be completed
+  // at some time later on. The client will be notified via web push when the work
+  // is done.
+  setTimeout(() => webPush.sendNotification(req.body.subscription, JSON.stringify({
     title: 'Done!',
     body: 'Your POST request has been received successfully',
     actions: [{
@@ -48,13 +53,12 @@ api.post('/post', (req, res) => {
       action: 'open-background-sync-page',
       title: 'Send another',
     }],
-  })).then(() => res.json({
+    // The async heavy work will finish randomly in a time span between 0 and 10 seconds
+  })), Math.random() * 10000);
+  res.json({
     success: true,
     data: 'OK',
-  })).catch(() => res.status(500).json({
-    success: false,
-    data: 'Internal Server Error',
-  }));
+  });
 });
 
 app.use('/api', api);

@@ -1,9 +1,19 @@
-self.idbName = 'vanilla-pwa-db';
-self.idbVersion = 1;
 self.cacheName = 'vanilla-pwa-static';
 self.cacheVersion = 'v1';
 self.cacheId = `${self.cacheName}-${self.cacheVersion}`;
-self.importScripts('./cache-manifest.js', './sw-helpers.js');
+self.importScripts('./cache-manifest.js', './db-helpers.js');
+
+self.openOrFocus = (url) =>
+  clients.matchAll({
+    type: 'window',
+  }).then((clientsList) => {
+    for (const client of clientsList) {
+      if ((url === '*' && client.url.startsWith('/')) || url === client.url) {
+        return client.focus();
+      }
+    }
+    return clients.openWindow(url === '*' ? '/' : url);
+  });
 
 // Event fired when the SW is installed
 self.addEventListener('install', (event) => {
@@ -67,12 +77,7 @@ self.addEventListener('fetch', (event) => {
   if (idbCacheRegex) {
     const [, store] = idbCacheRegex.exec(event.request.url);
     return event.respondWith(
-      self.openDB()
-        .then((db) => new Promise((resolve, reject) => {
-          const req = db.transaction(store).objectStore(store).getAll();
-          req.onsuccess = () => resolve(req.result);
-          req.onerror = reject;
-        }))
+      self.getAllFromDB(store)
         .then((data) => {
           // Even if we already saved the data in idb,
           // we start a new request so that the data can
@@ -85,12 +90,12 @@ self.addEventListener('fetch', (event) => {
               const clonedRes = res.clone();
               // Put the data into IDB, then return the cloned response
               return res.json()
-                .then(({ data }) => self.putIntoIDB(store, data))
+                .then(({ data }) => self.putIntoDB(store, data))
                 .then(() => clonedRes);
             })
             .then(res => res.json())
             .then((res) => {
-              self.putIntoIDB(store, res.data);
+              self.putIntoDB(store, res.data);
               return new Response(JSON.stringify(res));
             });
           // If we got data from IDB, respond with it
@@ -144,9 +149,6 @@ self.addEventListener('message', (event) => {
       // Skip the waiting phase and immediately replace the old Service Worker
       self.skipWaiting();
       break;
-    case 'fetch-data':
-      self.fetchData = event.data.options;
-      break;
   }
 });
 
@@ -155,9 +157,12 @@ self.addEventListener('sync', (event) => {
   switch (event.tag) {
     case 'fetch':
       event.waitUntil(
-        fetch(self.fetchData.url, self.fetchData)
-          .then((res) => res.json())
-          .then((res) => res.success ? res : Promise.reject(res)),
+        self.getAllFromDB('fetch-queue')
+          .then((queue) => Promise.all(queue.map((reqParams) =>
+            fetch(reqParams.url, reqParams)
+              .then((res) => res.json())
+              .then((res) => res.success || Promise.reject(res))
+              .then(() => self.removeFromDB('fetch-queue', reqParams.id))))),
       );
       break;
   }

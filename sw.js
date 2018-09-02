@@ -85,17 +85,20 @@ self.addEventListener('fetch', (event) => {
               const clonedRes = res.clone();
               // Put the data into IDB, then return the cloned response
               return res.json()
-                .then((reqObjs) => self.putIntoIDB(store, reqObjs))
+                .then(({ data }) => self.putIntoIDB(store, data))
                 .then(() => clonedRes);
             })
             .then(res => res.json())
-            .then(reqObjs => {
-              self.putIntoIDB(store, reqObjs);
-              return new Response(JSON.stringify(reqObjs));
+            .then((res) => {
+              self.putIntoIDB(store, res.data);
+              return new Response(JSON.stringify(res));
             });
           // If we got data from IDB, respond with it
           if (data && Object.keys(Array.isArray(data) ? data : [data]).length > 0) {
-            return new Response(JSON.stringify(data));
+            return new Response(JSON.stringify({
+              success: true,
+              data,
+            }));
           }
           // Otherwise, just return the fetch request that will cache the data into IDB
           return reqPromise;

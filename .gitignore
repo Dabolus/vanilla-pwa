@@ -1,2 +1,5 @@
 .idea/
 .firebase*
+.runtimeconfig.json
+node_modules/
+*.log

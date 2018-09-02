@@ -7,8 +7,8 @@ class MyDynamicData extends BaseElement {
   }
 
   async fetchData() {
-    const [data] = await Promise.all([
-      fetch('/api/data.json').then((res) => res.json()),
+    const [{ data }] = await Promise.all([
+      fetch('/api/data').then((res) => res.json()),
       this.readyPromise,
     ]);
     const dataContainer = this._root.querySelector('#data-container');

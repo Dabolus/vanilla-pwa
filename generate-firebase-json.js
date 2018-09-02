@@ -13,17 +13,21 @@ const firebaseJson = {
     ],
     rewrites: [
       {
+        source: '/api/**',
+        function: 'api',
+      },
+      {
         source: '**',
         destination: '/index.html',
       },
     ],
     headers: [
       {
-        source: '**',
+        source: '/api/**',
         headers: [
           {
             key: 'Cache-Control',
-            value: 'private, max-age=1209600',
+            value: 'no-cache',
           },
         ],
       },
@@ -37,6 +41,15 @@ const firebaseJson = {
           {
             key: 'Cache-Control',
             value: 'no-cache',
+          },
+        ],
+      },
+      {
+        source: '**',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'private, max-age=1209600',
           },
         ],
       },

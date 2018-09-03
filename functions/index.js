@@ -53,8 +53,8 @@ api.post('/post', (req, res) => {
       action: 'open-background-sync-page',
       title: 'Send another',
     }],
-    // The async heavy work will finish randomly in a time span between 0 and 10 seconds
-  })), Math.random() * 10000);
+    // The async heavy work will finish randomly in a time span between 0 and 5 seconds
+  })), Math.random() * 5000);
   res.json({
     success: true,
     data: 'OK',

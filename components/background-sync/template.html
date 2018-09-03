@@ -4,10 +4,11 @@
   <p>
     This page allows you to send a POST request to a mock backend. The POST request won't be directly
     executed by the website, but it will use the Background Sync API to tell the Service Worker
-    to execute it when possible. When the POST request is made, a push notification will be sent to
-    advise the user that everything went ok. This approach will allow to build a seamless experience for
-    the user, that is able to send the request and then close the website, even if the request hasn't been
-    executed yet.
+    to execute it when possible. When the POST request is made, the server will do some mock heavy, asynchronous
+    operations that will take random time between 0 and 5 seconds. A push notification will be sent to
+    advise the user that everything went ok as soon as these operations have been completed.
+    This approach allows us to build a seamless experience for the user, that is able to send
+    the request and then close the website, even if the request hasn't been executed yet.
   </p>
   <p>First of all, press the button below to enable notifications</p>
   <button id="notifications-button"></button>

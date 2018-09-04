@@ -18,7 +18,7 @@ self.precacheManifest = [
   'components/background-sync/template.html',
 ];
 
-self.runtimeStaticCacheManifest = [
+self.runtimeCacheManifest = [
   /placehold\.it/,
 ];
 

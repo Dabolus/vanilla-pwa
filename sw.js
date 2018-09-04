@@ -1,6 +1,7 @@
-self.cacheName = 'vanilla-pwa-static';
-self.cacheVersion = 'v1';
-self.cacheId = `${self.cacheName}-${self.cacheVersion}`;
+self.staticCacheName = 'vanilla-pwa-static';
+self.staticCacheVersion = 'v1';
+self.staticCacheId = `${self.staticCacheName}-${self.staticCacheVersion}`;
+self.runtimeCacheName = 'vanilla-pwa-runtime';
 self.importScripts('./cache-manifest.js', './db-helpers.js');
 
 self.openOrFocus = (url) =>
@@ -20,7 +21,7 @@ self.addEventListener('install', (event) => {
   // When the SW is installed, add to the cache all the URLs
   // specified in the precache manifest.
   event.waitUntil(
-    caches.open(self.cacheId)
+    caches.open(self.staticCacheId)
       .then((cache) => cache.addAll(self.precacheManifest)),
   );
 });
@@ -36,7 +37,7 @@ self.addEventListener('activate', (event) => {
       caches.keys().then((cacheNames) =>
         Promise.all(
           cacheNames.filter((cacheName) =>
-            cacheName.startsWith(self.cacheName) && cacheName !== self.cacheId,
+            cacheName.startsWith(self.staticCacheName) && cacheName !== self.staticCacheId,
           ).map((cacheName) =>
             caches.delete(cacheName),
           ),
@@ -129,13 +130,13 @@ self.addEventListener('fetch', (event) => {
     .then((response) => response || fetch(event.request));
   // If the URL is one of those who need to be cached at runtime,
   // clone the response and insert it into the cache.
-  if (self.runtimeStaticCacheManifest.some((regex) => regex.test(event.request.url))) {
+  if (self.runtimeCacheManifest.some((regex) => regex.test(event.request.url))) {
     promise.then((fetchRes) => {
       const clone = fetchRes.clone();
       if (!clone) {
         return;
       }
-      caches.open(self.cacheId)
+      caches.open(self.runtimeCacheName)
         .then((cache) => cache.put(event.request.url, clone));
     });
   }

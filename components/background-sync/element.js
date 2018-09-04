@@ -4,6 +4,10 @@ import '../../db-helpers.js';
 class MyBackgroundSync extends BaseElement {
   constructor() {
     super('/components/background-sync/template.html', '/components/background-sync/styles.css');
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
     this.prepareExperiment();
   }
 

@@ -3,6 +3,10 @@ import BaseElement from '../base.js';
 class MyDynamicData extends BaseElement {
   constructor() {
     super('/components/dynamic-data/template.html', '/components/dynamic-data/styles.css');
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
     this.fetchData();
   }
 

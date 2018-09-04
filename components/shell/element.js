@@ -4,13 +4,16 @@ import { setupRouter } from '../utils.js';
 class MyShell extends BaseElement {
   constructor() {
     super('/components/shell/template.html', '/components/shell/styles.css');
+  }
+
+  async connectedCallback() {
+    super.connectedCallback();
     setupRouter((location) => this.navigateTo(location));
-    this.readyPromise.then(() => {
-      this._updateNotification = this._root.querySelector('#update-notification');
-      this._root.querySelector('#ignore').addEventListener('click', () => this.toggleUpdateNotification(false));
-      this._root.querySelector('#update-now').addEventListener('click', () => this.update());
-      this.checkUpdates();
-    });
+    await this.readyPromise;
+    this._updateNotification = this._root.querySelector('#update-notification');
+    this._root.querySelector('#ignore').addEventListener('click', () => this.toggleUpdateNotification(false));
+    this._root.querySelector('#update-now').addEventListener('click', () => this.update());
+    this.checkUpdates();
   }
 
   async navigateTo({ pathname }) {

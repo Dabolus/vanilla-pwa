@@ -3,48 +3,48 @@
     "id": 1,
     "title": "Random thing 1",
     "description": "Just a random redish thing",
-    "image": "https://placeholder.pics/svg/256/c62828/fff"
+    "image": "https://placeholder.pics/svg/256/c62828/fff-c62828"
   },
   {
     "id": 2,
     "title": "Random thing 2",
     "description": "Just a random purpleish thing",
-    "image": "https://placeholder.pics/svg/256/6a1b9a/fff"
+    "image": "https://placeholder.pics/svg/256/6a1b9a/fff-6a1b9a"
   },
   {
     "id": 3,
     "title": "Random thing 3",
     "description": "Just a random indigoish thing",
-    "image": "https://placeholder.pics/svg/256/283593/fff"
+    "image": "https://placeholder.pics/svg/256/283593/fff-283593"
   },
   {
     "id": 4,
     "title": "Random thing 4",
     "description": "Just a random light blueish thing",
-    "image": "https://placeholder.pics/svg/256/0277bd/fff"
+    "image": "https://placeholder.pics/svg/256/0277bd/fff-0277bd"
   },
   {
     "id": 5,
     "title": "Random thing 5",
     "description": "Just a random tealish thing",
-    "image": "https://placeholder.pics/svg/256/00695c/fff"
+    "image": "https://placeholder.pics/svg/256/00695c/fff-00695c"
   },
   {
     "id": 6,
     "title": "Random thing 6",
     "description": "Just a random deep orangeish thing",
-    "image": "https://placeholder.pics/svg/256/bf360c/fff"
+    "image": "https://placeholder.pics/svg/256/bf360c/fff-bf360c"
   },
   {
     "id": 7,
     "title": "Random thing 7",
     "description": "Just a random brownish thing",
-    "image": "https://placeholder.pics/svg/256/4e342e/fff"
+    "image": "https://placeholder.pics/svg/256/4e342e/fff-4e342e"
   },
   {
     "id": 8,
     "title": "Random thing 8",
     "description": "Just a random blue greyish thing",
-    "image": "https://placeholder.pics/svg/256/37474f/fff"
+    "image": "https://placeholder.pics/svg/256/37474f/fff-37474f"
   }
 ]

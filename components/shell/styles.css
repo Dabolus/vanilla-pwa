@@ -1,8 +1,4 @@
 :host {
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
-
   --primary-color: #2e7d32;
   --accent-color: #d50000;
   --primary-text-on-primary: #fff;
@@ -11,6 +7,24 @@
   --secondary-text-color: rgba(0, 0, 0, .75);
   --divider-color: rgba(0, 0, 0, .12);
   --section-bg-color: #fefefe;
+  --background-color: #f0f0f0;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  background: var(--background-color);
+}
+
+:host([theme='dark']) {
+  --primary-color: #2e7d32;
+  --accent-color: #d50000;
+  --primary-text-on-primary: #fff;
+  --secondary-text-on-primary: rgba(255, 255, 255, .75);
+  --primary-text-color: rgba(255, 255, 255, .87);
+  --secondary-text-color: rgba(255, 255, 255, .75);
+  --divider-color: rgba(255, 255, 255, .12);
+  --section-bg-color: #212121;
+  --background-color: #2f2f2f;
 }
 
 header {
@@ -132,6 +146,73 @@ footer a, footer b {
 
 #update-notification .actions button:not(#update-now) {
   color: var(--secondary-text-color);
+}
+
+#theme-selector {
+  cursor: pointer;
+  fill: var(--primary-text-on-primary);
+  width: 1.5rem;
+  height: 1.5rem;
+  position: absolute;
+  right: 1rem;
+  top: 1.3rem;
+}
+
+#themes-dialog {
+  cursor: pointer;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  z-index: -1;
+  will-change: background, z-index;
+  transition: .3s background, .3s z-index step-end;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#themes-dialog .modal {
+  width: 20rem;
+  max-width: 100%;
+  background: var(--section-bg-color);
+  color: var(--primary-text-color);
+  border-radius: .5rem;
+  transform: scale(0);
+  will-change: transform;
+  transition: .3s transform;
+}
+
+#themes-dialog.active {
+  background: rgba(0, 0, 0, .6);
+  z-index: 10;
+  transition: .3s background, .3s z-index step-start;
+}
+
+#themes-dialog.active .modal {
+  transform: scale(1);
+}
+
+.modal .title {
+  padding: 1rem;
+  border-bottom: .05rem solid var(--divider-color);
+}
+
+#themes {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#themes > li {
+  cursor: pointer;
+  padding: 1rem;
+}
+
+#themes > li:hover, #themes > li:focus {
+  background: var(--divider-color);
 }
 
 @media (min-width: 640px) {

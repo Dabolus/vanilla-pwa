@@ -37,6 +37,31 @@ a:hover, a:focus {
   text-decoration: underline;
 }
 
+button {
+  font-size: .875rem;
+  font-weight: 500;
+  padding: 0 8px 0 8px;
+  min-width: 64px;
+  height: 36px;
+  color: var(--accent-color);
+  background-color: transparent;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-radius: .125rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+button:hover:not([disabled]) {
+  text-decoration: underline;
+}
+
+button[disabled] {
+  cursor: not-allowed;
+  color: var(--secondary-text-color);
+  opacity: .5;
+}
 @media (min-width: 640px) {
   section {
     max-width: 37.5rem;

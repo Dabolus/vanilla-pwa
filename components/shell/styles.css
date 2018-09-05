@@ -130,28 +130,8 @@ footer a, footer b {
   flex-wrap: wrap;
 }
 
-#update-notification .actions button {
-  font-size: .875rem;
-  font-weight: 500;
-  padding: 0 8px 0 8px;
-  min-width: 64px;
-  height: 36px;
+#update-notification .actions button:not(#update-now) {
   color: var(--secondary-text-color);
-  background-color: transparent;
-  text-decoration: none;
-  text-transform: uppercase;
-  border-radius: .125rem;
-  border: none;
-  outline: none;
-  cursor: pointer;
-}
-
-#update-notification .actions button:hover {
-  text-decoration: underline;
-}
-
-#update-notification .actions button#update-now {
-  color: var(--accent-color);
 }
 
 @media (min-width: 640px) {

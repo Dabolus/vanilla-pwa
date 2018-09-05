@@ -12,7 +12,8 @@ article {
   margin: 2rem;
   border-radius: .5rem;
   box-shadow: 0 .06rem .065rem 0 rgba(0, 0, 0, 0.14), 0 .003rem .15rem 0 rgba(0, 0, 0, 0.12), 0 .09rem .0035rem -.065rem rgba(0, 0, 0, 0.2);
-  background-color: var(--section-bg-color);
+  background: var(--section-bg-color);
+  color: var(--primary-text-color);
 }
 
 article div {

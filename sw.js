@@ -112,9 +112,9 @@ self.addEventListener('fetch', (event) => {
     );
   }
 
-  // STATIC CACHE
-  // This part of the SW will generate a runtime static cache for
-  // static assets. This is meant to be used for assets like fonts
+  // RUNTIME CACHE
+  // This part of the SW will generate a runtime cache for
+  // files/blobs. This is meant to be used for assets like fonts
   // or images that are only known at runtime and not during our SW
   // installation.
   // For example, in our case it will be used to dynamically cache

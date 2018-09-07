@@ -51,6 +51,7 @@ header {
   align-items: center;
   justify-content: center;
   background: var(--primary-color);
+  height: 7rem;
 }
 
 header::after {
@@ -233,10 +234,30 @@ footer a, footer b {
   background: var(--divider-color);
 }
 
+#share-button {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  padding: 1rem;
+  border-radius: 50%;
+  background: var(--accent-color);
+  fill: var(--primary-text-on-primary);
+  cursor: pointer;
+  box-shadow: 0 .06rem .065rem 0 rgba(0, 0, 0, 0.14), 0 .003rem .15rem 0 rgba(0, 0, 0, 0.12), 0 .09rem .0035rem -.065rem rgba(0, 0, 0, 0.2);
+}
+
 @media (min-width: 640px) {
   #update-notification {
     width: 20rem;
     margin: auto;
     border-radius: .5rem .5rem 0 0;
+  }
+
+  #share-button {
+    position: absolute;
+    top: 5.25rem;
+    right: 5.25rem;
   }
 }

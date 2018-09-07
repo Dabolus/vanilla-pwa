@@ -19,12 +19,21 @@ class MyShell extends BaseElement {
     this._themesDialog.addEventListener('click', () => this.toggleThemesDialog());
     this._root.querySelectorAll('#themes > li')
       .forEach((li) => li.addEventListener('click', () => this.setTheme(li.dataset.theme)));
+    this._root.querySelector('#share-button').addEventListener('click', () => this.share());
     this.checkUpdates();
   }
 
   setTheme(theme) {
     this.setAttribute('theme', theme);
     localStorage.setItem('theme', theme);
+  }
+
+  share() {
+    navigator.share({
+      title: document.title,
+      text: `Check out ${document.title} on Vanilla PWA!`,
+      url: window.location.href,
+    });
   }
 
   async navigateTo({ pathname }) {

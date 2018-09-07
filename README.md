@@ -14,6 +14,7 @@ These are the native modern technologies used in this PWA:
 - [Notifications API](https://notifications.spec.whatwg.org)
 - [Storage API (Cache API, IndexedDB)](https://storage.spec.whatwg.org)
 - [Background Sync API](https://wicg.github.io/BackgroundSync/spec/)
+- [Web Share API](https://wicg.github.io/web-share/)
 - Many ES6/7/8 features ([async functions](https://tc39.github.io/ecmascript-asyncawait/), [object rest/spread](https://tc39.github.io/proposal-object-rest-spread/), etc.)
 
 ### Testing locally

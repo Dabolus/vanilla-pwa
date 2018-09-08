@@ -2,9 +2,18 @@ import BaseElement from '../base.js';
 import { setupRouter } from '../utils.js';
 
 class MyShell extends BaseElement {
+  get pages() {
+    return {
+      'home': 'Home',
+      'dynamic-data': 'Dynamic data',
+      'background-sync': 'Background sync',
+    };
+  };
+
   constructor() {
     super('/components/shell/template.html', '/components/shell/styles.css');
     this.setTheme(localStorage.getItem('theme') || 'light');
+    this.page = 'home';
   }
 
   async connectedCallback() {
@@ -31,18 +40,19 @@ class MyShell extends BaseElement {
   share() {
     navigator.share({
       title: document.title,
-      text: `Check out ${document.title} on Vanilla PWA!`,
+      text: `Check out ${this.pages[this.page]} on Vanilla PWA!`,
       url: window.location.href,
     });
   }
 
   async navigateTo({ pathname }) {
     let path = decodeURIComponent(pathname).substring(1);
-    if (!path) {
+    if (!path || !Object.keys(this.pages).includes(path)) {
       history.replaceState({}, '', '/home');
       path = 'home';
     }
     const elem = await import(`../${path}/element.js`);
+    this.page = path;
     // At this point the element should already be ready,
     // but we await its promise just to be sure.
     await this.readyPromise;
@@ -60,11 +70,7 @@ class MyShell extends BaseElement {
         page.removeAttribute('active');
       }
     }
-    document.title = `Vanilla PWA - ${{
-      'home': 'Home',
-      'dynamic-data': 'Dynamic data',
-      'background-sync': 'Background sync',
-    }[path]}`;
+    document.title = `Vanilla PWA - ${this.pages[path]}`;
   }
 
   toggleUpdateNotification(state) {

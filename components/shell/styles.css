@@ -142,6 +142,7 @@ footer a, footer b {
   transition-property: visibility, transform;
   transition-duration: .3s;
   visibility: hidden;
+  z-index: 2;
 }
 
 #update-notification.active {
@@ -204,7 +205,7 @@ footer a, footer b {
 
 #themes-dialog.active {
   background: rgba(0, 0, 0, .6);
-  z-index: 10;
+  z-index: 3;
   transition: .3s background, .3s z-index step-start;
 }
 
@@ -246,6 +247,7 @@ footer a, footer b {
   fill: var(--primary-text-on-primary);
   cursor: pointer;
   box-shadow: 0 .06rem .065rem 0 rgba(0, 0, 0, 0.14), 0 .003rem .15rem 0 rgba(0, 0, 0, 0.12), 0 .09rem .0035rem -.065rem rgba(0, 0, 0, 0.2);
+  z-index: 1;
 }
 
 @media (min-width: 640px) {

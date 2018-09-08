@@ -1,6 +1,8 @@
 self.dbName = 'vanilla-pwa-db';
 self.dbVersion = 1;
 
+// Opens the DB, adding the necessary object stores if needed.
+// Returns a promise that resolves with the DB if everything goes well.
 self.openDB = () =>
   new Promise((resolve, reject) => {
     const openDbReq = indexedDB.open(self.dbName, self.dbVersion);
@@ -20,7 +22,8 @@ self.openDB = () =>
     openDbReq.onerror = reject;
   });
 
-
+// Adds an object or an array of objects to the specified object store.
+// Returns a promise with the result of the transaction if everything goes well.
 self.putIntoDB = (objectStore, objs) =>
   Promise.all((Array.isArray(objs) ? objs : [objs]).map(obj =>
     self.openDB()
@@ -34,6 +37,8 @@ self.putIntoDB = (objectStore, objs) =>
         }),
       )));
 
+// Given an ID or an array of IDs, removes all the objects matching that ID(s) from the specified object store.
+// Returns a promise with the result of the transaction if everything goes well.
 self.removeFromDB = (objectStore, ids) =>
   Promise.all((Array.isArray(ids) ? ids : [ids]).map(id =>
     self.openDB()
@@ -47,6 +52,8 @@ self.removeFromDB = (objectStore, ids) =>
         }),
       )));
 
+// Gets all the objects contained in the specified object store.
+// Returns a promise that resolves to the array of objects if everything goes well.
 self.getAllFromDB = (objectStore) =>
   self.openDB()
     .then((db) => new Promise((resolve, reject) => {

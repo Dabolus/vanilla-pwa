@@ -43,6 +43,20 @@
   filter: saturate(300%);
 }
 
+@media (light-level: dim) {
+  :host([theme='auto']) {
+    --primary-color: #2e7d32;
+    --accent-color: #d50000;
+    --primary-text-on-primary: #fff;
+    --secondary-text-on-primary: rgba(255, 255, 255, .75);
+    --primary-text-color: rgba(255, 255, 255, .87);
+    --secondary-text-color: rgba(255, 255, 255, .75);
+    --divider-color: rgba(255, 255, 255, .12);
+    --section-bg-color: #212121;
+    --background-color: #2f2f2f;
+  }
+}
+
 header {
   position: relative;
   width: 100%;

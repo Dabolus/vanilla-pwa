@@ -38,7 +38,7 @@ some environment variables. If you are using Firebase, you will need to create a
   }
 }
 ```
-Note: **this only applies for local development**. If you want to deploy the PWA, be sure to ignore this file and execute the following commands to set the variables instead:
+Note: **this only applies to local development**. If you want to deploy the PWA, be sure to ignore this file and execute the following commands to set the variables instead:
 ```bash
 $ firebase functions:config:set webpush.subject="your email"
 $ firebase functions:config:set webpush.publickey="your public key"

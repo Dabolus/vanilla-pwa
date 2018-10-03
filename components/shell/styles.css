@@ -43,6 +43,8 @@
   filter: saturate(300%);
 }
 
+/* Fun fact: this media query exists, but it hasn't been implemented by any browser yet.
+ * This means that for now the "auto" theme won't work. Hopefully Chrome will implement it soon. */
 @media (light-level: dim) {
   :host([theme='auto']) {
     --primary-color: #2e7d32;

@@ -19,7 +19,7 @@ self.precacheManifest = [
 ];
 
 self.runtimeCacheManifest = [
-  /placehold\.it/,
+  /placeholder\.pics/,
 ];
 
 // Each of this entries should contain a capturing group that will be used as an object store on IDB

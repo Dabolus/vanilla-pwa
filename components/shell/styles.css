@@ -43,9 +43,11 @@
   filter: saturate(300%);
 }
 
-/* Fun fact: this media query exists, but it hasn't been implemented by any browser yet.
- * This means that for now the "auto" theme won't work. Hopefully Chrome will implement it soon. */
-@media (light-level: dim) {
+/* Fun fact: the first media query exists, but it hasn't been implemented by any browser yet.
+ * This means that for now the "auto" theme won't work. Hopefully Chrome will implement it soon.
+ * The second media query is currently only implemented by Safari and it can be used to match
+ * the user selected system-wide theme. */
+@media (light-level: dim), (prefers-color-scheme: dark) {
   :host([theme='auto']) {
     --primary-color: #2e7d32;
     --accent-color: #d50000;

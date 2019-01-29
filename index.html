@@ -19,10 +19,12 @@
     <meta name="theme-color" content="#2e7d32">
 
     <script>
-      window.addEventListener('load', () =>
-        navigator.serviceWorker.register('sw.js', {
-          scope: '/',
-        }));
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () =>
+          navigator.serviceWorker.register('sw.js', {
+            scope: '/',
+          }));
+      }
     </script>
     <style>
       *, *::before, *::after {

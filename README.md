@@ -6,6 +6,7 @@ These are the native modern technologies used in this PWA:
 
 - [HTML Templates](https://html.spec.whatwg.org/multipage/scripting.html#the-template-element)
 - [CSS Variables](https://www.w3.org/TR/css-variables/)
+- [Level 5 CSS Media Queries](https://drafts.csswg.org/mediaqueries-5/)
 - [Custom Elements](https://html.spec.whatwg.org/multipage/custom-elements.html)
 - [Shadow DOM](https://dom.spec.whatwg.org/#shadow-trees)
 - [ES Modules](https://html.spec.whatwg.org/multipage/webappapis.html#integration-with-the-javascript-module-system)

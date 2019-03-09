@@ -7,6 +7,7 @@ class MyShell extends BaseElement {
       'home': 'Home',
       'dynamic-data': 'Dynamic data',
       'background-sync': 'Background sync',
+      'sensors': 'Sensors',
     };
   };
 

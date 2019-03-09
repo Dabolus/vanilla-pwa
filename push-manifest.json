@@ -150,5 +150,43 @@
       "type": "document",
       "weight": 1
     }
+  },
+  "/sensors": {
+    "components/base.js": {
+      "type": "script",
+      "weight": 1
+    },
+    "components/utils.js": {
+      "type": "script",
+      "weight": 1
+    },
+    "components/shared-styles.css": {
+      "type": "style",
+      "weight": 1
+    },
+    "components/shell/element.js": {
+      "type": "script",
+      "weight": 1
+    },
+    "components/shell/styles.css": {
+      "type": "style",
+      "weight": 1
+    },
+    "components/shell/template.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "components/sensors/element.js": {
+      "type": "script",
+      "weight": 1
+    },
+    "components/sensors/styles.css": {
+      "type": "style",
+      "weight": 1
+    },
+    "components/sensors/template.html": {
+      "type": "document",
+      "weight": 1
+    }
   }
 }

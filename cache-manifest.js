@@ -16,6 +16,9 @@ self.precacheManifest = [
   'components/background-sync/element.js',
   'components/background-sync/styles.css',
   'components/background-sync/template.html',
+  'components/sensors/element.js',
+  'components/sensors/styles.css',
+  'components/sensors/template.html',
 ];
 
 self.runtimeCacheManifest = [

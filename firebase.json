@@ -86,6 +86,15 @@
             "value": "</components/base.js>;rel=preload;as=script,</components/utils.js>;rel=preload;as=script,</components/shared-styles.css>;rel=preload;as=style,</components/shell/element.js>;rel=preload;as=script,</components/shell/styles.css>;rel=preload;as=style,</components/shell/template.html>;rel=preload;as=document,</components/background-sync/element.js>;rel=preload;as=script,</components/background-sync/styles.css>;rel=preload;as=style,</components/background-sync/template.html>;rel=preload;as=document"
           }
         ]
+      },
+      {
+        "source": "/sensors",
+        "headers": [
+          {
+            "key": "Link",
+            "value": "</components/base.js>;rel=preload;as=script,</components/utils.js>;rel=preload;as=script,</components/shared-styles.css>;rel=preload;as=style,</components/shell/element.js>;rel=preload;as=script,</components/shell/styles.css>;rel=preload;as=style,</components/shell/template.html>;rel=preload;as=document,</components/sensors/element.js>;rel=preload;as=script,</components/sensors/styles.css>;rel=preload;as=style,</components/sensors/template.html>;rel=preload;as=document"
+          }
+        ]
       }
     ]
   }

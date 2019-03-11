@@ -5,5 +5,42 @@
     This page allows you to test your device sensors, which can be accessed through
     the <a href="https://www.w3.org/TR/generic-sensor/">Generic Sensor API</a>.
   </p>
-  <h2>Absolute Orientation</h2>
+  <h3>Linear acceleration</h3>
+  <p>
+    The linear acceleration sensor measures acceleration that is applied to the 
+    device hosting the sensor, excluding the contribution of a gravity force. 
+    When a device is at rest, for instance, lying flat on the table, the sensor 
+    would measure ≈ 0 m/s2 acceleration on three axes.
+  </p>
+  <h3>Gyroscope</h3>
+  <p>
+    The Gyroscope sensor measures angular velocity in rad/s around the device's 
+    local X, Y and Z axis. Most of the consumer devices have mechanical (MEMS) 
+    gyroscopes, which are inertial sensors that measure rotation rate based on 
+    inertial Coriolis force. A MEMS gyroscopes are prone to drift that is caused 
+    by sensor's gravitational sensitivity which deforms the sensor's internal 
+    mechanical system. Gyroscopes oscillate at relative high frequencies, e.g., 
+    10's of kHz, and therefore, might consume more power compared to other sensors.
+  </p>
+  <h3>Absolute orientation</h3>
+  <p>
+    The absolute orientation sensor is a fusion sensor that measures rotation of 
+    a device in relation to the Earth’s coordinate system.
+  </p>
+  <h3>Relative orientation</h3>
+  <p>
+    The relative orientation sensor provides data representing rotation of a device 
+    hosting motion sensors in relation to a stationary reference coordinate system.
+  </p>
+  <h3>Ambient light</h3>
+  <p>
+    The ambient light sensor provides information about ambient light levels, as 
+    detected by the device’s main light detector, in terms of lux units.
+  </p>
+  <h3>Magnetometer</h3>
+  <p>
+    The magnetometer provides information about the magnetic field as detected by 
+    the device's primary magnetometer sensor. The magnetometer sensor measures the 
+    magnetic field for all three physical axes (x, y, z) in μT (micro Tesla).
+  </p>
 </section>

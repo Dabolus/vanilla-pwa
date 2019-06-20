@@ -44,8 +44,7 @@
 }
 
 /* Fun fact: the first media query exists, but it hasn't been implemented by any browser yet.
- * This means that for now the "auto" theme won't work. Hopefully Chrome will implement it soon.
- * The second media query is currently only implemented by Safari and it can be used to match
+ * This means that for now the "auto" theme won't change with the light level, but only with
  * the user selected system-wide theme. */
 @media (light-level: dim), (prefers-color-scheme: dark) {
   :host([theme='auto']) {
